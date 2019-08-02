@@ -1,8 +1,6 @@
-package other;
+package interview;
 
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Queue;
 
 
 // https://blog.csdn.net/qinfeng9988/article/details/83868644
