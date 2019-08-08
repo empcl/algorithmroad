@@ -1,5 +1,6 @@
 package list;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,9 @@ public class Demo1 {
         listOper.addNode(2);
         listOper.addNode(4);
         listOper.addNode(5);
+        Solution solution = new Solution();
+        ArrayList<Integer> integers =
+                solution.printListFromTailToHead(listOper.head);
 //        Node elem = listOper.findElem(6);
 //        System.out.println(elem);
 //        listOper.orderList();

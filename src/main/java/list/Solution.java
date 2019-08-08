@@ -2,6 +2,7 @@ package list;
 
 import tree.TreeNode;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -9,6 +10,27 @@ import java.util.Stack;
  * @since 2019/6/16 22:54
  */
 public class Solution {
+
+    public ArrayList<Integer> printListFromTailToHead(Node listNode) {
+        Node head = new Node(-1);
+        Node currentNode = listNode;
+        Node tmpNode = null;
+        while (currentNode != null) {
+            tmpNode = currentNode;
+            currentNode = currentNode.next;
+            tmpNode.next = head.next;
+            head.next = tmpNode;
+        }
+
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        currentNode = head.next;
+        while (currentNode != null) {
+            list.add(currentNode.data);
+            currentNode = currentNode.next;
+        }
+        return list;
+    }
+
 
     private static Node deleteDuplication(Node pHead)
     {

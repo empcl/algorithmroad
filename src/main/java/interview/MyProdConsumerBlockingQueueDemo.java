@@ -56,7 +56,7 @@ class MyResource {
 }
 
 public class MyProdConsumerBlockingQueueDemo {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         MyResource resource = new MyResource(new ArrayBlockingQueue<String>(5));
         new Thread(() -> {
             try {
@@ -74,7 +74,11 @@ public class MyProdConsumerBlockingQueueDemo {
             }
         }, "consumer").start();
 
-        TimeUnit.SECONDS.sleep(5L);
+        try {
+            TimeUnit.SECONDS.sleep(1l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("停止生产数据和消费数据");
         resource.stop();

@@ -207,7 +207,6 @@ public class ArrayOper {
                 small = small + 1;
             }
         }
-        return;
     }
 
 
