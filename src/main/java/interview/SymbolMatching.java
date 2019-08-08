@@ -1,5 +1,7 @@
 package interview;
 
+import java.util.Stack;
+
 /**
  * Module Desc:
  * 给个字符串，只有(){}[]，看看是否是匹配的
@@ -10,25 +12,34 @@ public class SymbolMatching {
     public boolean match(String str) {
         char[] chars = str.toCharArray();
         int len = chars.length;
-        int left = 0;
-        int right = len - 1;
-        while (left <= right) {
-            char l = chars[left];
-            char r = chars[right];
-            if ((l == '{' || l == '[' || l == '(') || (r == '{' || r == '[' || r == '(')) {
-                if ((l == '{' && r != '}') || (l != '{' && r == '}') ||
-                        (l == '[' && r != ']') || (l != '[' && r == ']') ||
-                        (l == '(' && r != ')') || (l != '(' && r == ')'))
-                    return false;
+        Stack<Character> stack = new Stack<Character>();
+        for (int i = 0; i < len; i++) {
+            if (chars[i] == '{' || chars[i] == '[' || chars[i] == '(') {
+                stack.push(chars[i]);
+            } else {
+                // ]123 为了防止出现开局就是]})的情况
+                if (!stack.isEmpty()) {
+                    if ((chars[i] == '}' && stack.peek() != '{') ||
+                            (chars[i] == ']' && stack.peek() != '[') ||
+                            (chars[i] == ')') && stack.peek() != '(') {
+                        return false;
+                    } else if ((chars[i] == '}' && stack.peek() == '{') ||
+                            (chars[i] == ']' && stack.peek() == '[') ||
+                            (chars[i] == ')') && stack.peek() == '(') {
+                        stack.pop();
+                    } else {}
+                } else {
+                    if (chars[i] < '0' || chars[i] > '9')
+                        return false;
+                }
+
             }
-            left++;
-            right--;
         }
-        return true;
+        return stack.isEmpty();
     }
 
     public static void main(String[] args) {
-        String str = "((([))])";
+        String str = "123()[[])";
         SymbolMatching matching = new SymbolMatching();
         boolean match = matching.match(str);
         System.out.println(match);
