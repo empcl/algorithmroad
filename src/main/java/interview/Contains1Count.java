@@ -29,7 +29,7 @@ public class Contains1Count {
 
     public static void main(String[] args) {
         Contains1Count contains1Count = new Contains1Count();
-        int number = contains1Count.NumberOf1_final(10);
+        int number = contains1Count.NumberOf1_final(-128);
         System.out.println(number);
     }
 }
