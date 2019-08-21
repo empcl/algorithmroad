@@ -251,7 +251,7 @@ public class SortOper {
             temp = a[0]; // 将堆顶元素与堆底元素交换，保证最大的元素在正确的位置上
             a[0] = a[i];
             a[i] = temp;
-            adjustUpToDown(a, 0, i); // 调整剩余的堆元素
+            adjustUpToDown(a,0, i); // 调整剩余的堆元素
         }
         return a;
     }
@@ -266,9 +266,9 @@ public class SortOper {
     }
 
     // 将数组元素a自上向下逐步调整树形结构
-    private int[] adjustUpToDown(int[] a, int k, int length) {
+    private void adjustUpToDown(int[] a, int k, int length) {
         int temp = a[k];
-        for (int i = 2 * k + 1; i < length - 1; i = 2 * i + 1) { // i 为初始节点k的左孩子节点，沿节点较大的子节点向下调整
+        for (int i = 2 * k + 1; i <= length - 1; i = 2 * i + 1) { // i 为初始节点k的左孩子节点，沿节点较大的子节点向下调整
             if (i < length - 1 && a[i] < a[i + 1])
                 i++; // 如果右孩子节点 > 左孩子节点，则取右孩子节点坐标
             if (temp >= a[i]) { // 如果根节点 >= 左右孩子中最大的节点，调整结束。
@@ -278,9 +278,8 @@ public class SortOper {
                 a[k] = a[i]; // 将左右子节点中较大值调整到双亲节点上
                 k = i;  // 修改k值，以便继续向下调整
             }
-            a[k] = temp; // 被调整的节点的值放入最终的位置上
         }
-        return a;
+        a[k] = temp; // 被调整的节点的值放入最终的位置上
     }
 
     /**
